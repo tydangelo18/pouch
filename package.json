@@ -20,6 +20,7 @@
   "homepage": "https://github.com/tydangelo18/pouch#readme",
   "dependencies": {
     "apollo-server": "^3.6.2",
-    "graphql": "^16.3.0"
+    "graphql": "^16.3.0",
+    "mongoose": "^6.1.8"
   }
 }
