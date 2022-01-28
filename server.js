@@ -2,6 +2,8 @@ const { ApolloServer } = require("apollo-server");
 const gql = require("graphql-tag");
 const mongoose = require("mongoose");
 
+const Pouch = require("./models/Pouch");
+
 const { MONGODB } = require("./config/config");
 
 const typeDefs = gql`
