@@ -1,22 +1,10 @@
 const { ApolloServer } = require("apollo-server");
-const gql = require("graphql-tag");
 const mongoose = require("mongoose");
 
-const Pouch = require("./models/Pouch");
+const typeDefs = require("./graphql/typeDefs");
+const resolvers = require("./graphql/resolvers");
 
 const { MONGODB } = require("./config/config");
-
-const typeDefs = gql`
-  type Query {
-    sayHi: String!
-  }
-`;
-
-const resolvers = {
-  Query: {
-    sayHi: () => "Testing... Hello!",
-  },
-};
 
 // Apollo Server Instance
 const server = new ApolloServer({
@@ -24,6 +12,7 @@ const server = new ApolloServer({
   resolvers,
 });
 
+// Database Connection
 mongoose
   .connect(MONGODB, { useNewUrlParser: true })
   .then(() => {
