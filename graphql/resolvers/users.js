@@ -1,15 +1,26 @@
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+
 // Dependency For Apollo to recognize errors and display it
 const { UserInputError } = require("apollo-server");
+
+// Bring in Validation of registering a user
+const { validateRegisterInput } = require("../../utils/validators");
 const { SECRET_KEY } = require("../../config/config");
 
 module.exports = {
   Mutation: {
-    async register(_, { registerInput: { email, password } }) {
-      // TODO: Validate the user data for logging in
-
+    async register(_, { registerInput: { email, password, confirmPassword } }) {
+      // Validate the user data for logging in
+      const { valid, errors } = validateRegisterInput(
+        email,
+        password,
+        confirmPassword
+      );
+      if (!valid) {
+        throw new UserInputError("Errors", { errors });
+      }
       // Make sure user doesn't already exist so no duplicate users can be stored into the database (same email)
       const user = await User.findOne({ email });
       // if user already exists => return an error
