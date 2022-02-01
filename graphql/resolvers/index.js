@@ -1,11 +1,13 @@
 const pouchesResolvers = require("./pouches");
-const usersResolvers = require("./users");
+const registerResolver = require("./users/register");
+const loginResolver = require("./users/login");
 
 module.exports = {
   Query: {
     ...pouchesResolvers.Query,
   },
   Mutation: {
-    ...usersResolvers.Mutation,
+    ...registerResolver.Mutation,
+    ...loginResolver.Mutation,
   },
 };

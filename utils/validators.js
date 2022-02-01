@@ -1,3 +1,4 @@
+// Register User Validator
 module.exports.validateRegisterInput = (email, password, confirmPassword) => {
   const errors = {};
   if (email.trim() === " ") {
@@ -41,6 +42,22 @@ module.exports.validateRegisterInput = (email, password, confirmPassword) => {
     errors.confirmPassword = "Passwords must match";
   }
 
+  return {
+    errors,
+    valid: Object.keys(errors).length < 1,
+  };
+};
+
+// Login User Validator
+module.exports.validateLoginInput = (email, password) => {
+  const errors = {};
+  if (email.trim() === "") {
+    errors.email = "Email field cannot be left blank";
+  }
+
+  if (password.trim() === "") {
+    errors.password = "Password field cannot be left blank";
+  }
   return {
     errors,
     valid: Object.keys(errors).length < 1,

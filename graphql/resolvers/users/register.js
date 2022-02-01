@@ -1,4 +1,4 @@
-const User = require("../../models/User");
+const User = require("../../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -6,11 +6,12 @@ const jwt = require("jsonwebtoken");
 const { UserInputError } = require("apollo-server");
 
 // Bring in Validation of registering a user
-const { validateRegisterInput } = require("../../utils/validators");
-const { SECRET_KEY } = require("../../config/config");
+const { validateRegisterInput } = require("../../../utils/validators");
+const { SECRET_KEY } = require("../../../config/config");
 
 module.exports = {
   Mutation: {
+    // register
     async register(_, { registerInput: { email, password, confirmPassword } }) {
       // Validate the user data for logging in
       const { valid, errors } = validateRegisterInput(
@@ -45,20 +46,21 @@ module.exports = {
         createdAt: new Date().toISOString(),
       });
 
-      const res = await newUser.save();
+      const registeredUser = await newUser.save();
 
-      // Create Auth Token
-      const token = jwt.sign(
-        {
-          id: res.id,
-          email: res.email,
+      // Create token
+      const payload = {
+        user: {
+          id: registeredUser.id,
+          email: registeredUser.email,
         },
-        SECRET_KEY,
-        { expiresIn: "1h" }
-      );
+      };
+
+      const token = jwt.sign(payload, SECRET_KEY, { expiresIn: 360000 });
+
       return {
-        ...res._doc,
-        id: res._id,
+        ...registeredUser._doc,
+        id: registeredUser._id,
         token,
       };
     },

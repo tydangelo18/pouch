@@ -23,8 +23,9 @@ module.exports = gql`
   type Query {
     getPouches: [Pouch]
   }
-  
+
   type Mutation {
     register(registerInput: RegisterInput): User!
+    login(email: String!, password: String!): User!
   }
 `;
