@@ -1,4 +1,4 @@
-const Pouch = require("../../models/Pouch");
+const Pouch = require("../../../models/Pouch");
 
 module.exports = {
   Query: {

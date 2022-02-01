@@ -22,6 +22,7 @@ module.exports = gql`
 
   type Query {
     getPouches: [Pouch]
+    getPouch(pouchId: ID!): Pouch
   }
 
   type Mutation {

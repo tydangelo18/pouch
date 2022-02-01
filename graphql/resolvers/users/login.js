@@ -39,7 +39,7 @@ module.exports = {
         });
       }
 
-      // Verify token
+      // Return token in response on login
       const payload = {
         user: {
           id: user.id,
