@@ -10,10 +10,11 @@ const { MONGODB } = require("./config/config");
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  // auth = { ...auth header }
+  // context = { ...auth header }
   // Take the request body and will forward it to the auth variable to access for our auth middleware for protected routes
   // this is to access the auth headers to make sure the user is authenticated to perform protected methods
-  auth: ({ req }) => ({ req }),
+  context: ({ req }) => ({ req }),
+  uploads: false,
 });
 
 // Database Connection

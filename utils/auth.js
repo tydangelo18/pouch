@@ -3,10 +3,10 @@ const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config/config");
 const { AuthenticationError } = require("apollo-server");
 
-module.exports = (auth) => {
-  // auth = { ...headers: authorization header }
+module.exports = (context) => {
+  // context = { ...headers: authorization header }
   // Get auth header
-  const authHeader = auth.req.headers.authorization;
+  const authHeader = context.req.headers.authorization;
 
   // Check for auth header
   if (authHeader) {
@@ -25,5 +25,5 @@ module.exports = (auth) => {
     }
     throw new Error("Authentication token must be ===> 'Bearer [token]");
   }
-  throw new Error("Authentication header must be provided");
+  throw new Error("Authorization header must be provided");
 };

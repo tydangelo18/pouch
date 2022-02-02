@@ -28,7 +28,7 @@ module.exports = gql`
   type Mutation {
     register(registerInput: RegisterInput): User!
     login(email: String!, password: String!): User!
-    # Create Pouch
+    createPouch(name: String!): Pouch!
     # Delete Pouch by id
   }
 `;
