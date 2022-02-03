@@ -29,6 +29,6 @@ module.exports = gql`
     register(registerInput: RegisterInput): User!
     login(email: String!, password: String!): User!
     createPouch(name: String!): Pouch!
-    # Delete Pouch by id
+    deletePouch(pouchId: ID!): String!
   }
 `;

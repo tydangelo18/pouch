@@ -9,6 +9,17 @@ const { UserInputError } = require("apollo-server");
 const { validateLoginInput } = require("../../../utils/validators");
 const { SECRET_KEY } = require("../../../config/config");
 
+function generateToken(user) {
+  return jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
+    },
+    SECRET_KEY,
+    { expiresIn: "1h" }
+  );
+}
+
 module.exports = {
   Mutation: {
     // login
@@ -40,13 +51,7 @@ module.exports = {
       }
 
       // Return token in response on login
-      const payload = {
-        user: {
-          id: user.id,
-          email: user.email,
-        },
-      };
-      const token = jwt.sign(payload, SECRET_KEY, { expiresIn: 360000 });
+      const token = generateToken(user);
 
       return {
         ...user._doc,

@@ -9,6 +9,17 @@ const { UserInputError } = require("apollo-server");
 const { validateRegisterInput } = require("../../../utils/validators");
 const { SECRET_KEY } = require("../../../config/config");
 
+function generateToken(user) {
+  return jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
+    },
+    SECRET_KEY,
+    { expiresIn: "1h" }
+  );
+}
+
 module.exports = {
   Mutation: {
     // register
@@ -46,21 +57,14 @@ module.exports = {
         createdAt: new Date().toISOString(),
       });
 
-      const registeredUser = await newUser.save();
+      const res = await newUser.save();
 
       // Create token
-      const payload = {
-        user: {
-          id: registeredUser.id,
-          email: registeredUser.email,
-        },
-      };
-
-      const token = jwt.sign(payload, SECRET_KEY, { expiresIn: 360000 });
+      const token = generateToken(res);
 
       return {
-        ...registeredUser._doc,
-        id: registeredUser._id,
+        ...res._doc,
+        id: res._id,
         token,
       };
     },

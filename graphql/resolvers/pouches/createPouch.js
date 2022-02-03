@@ -4,11 +4,11 @@ const authCheck = require("../../../utils/auth");
 module.exports = {
   Mutation: {
     async createPouch(_, { name }, context) {
-      const user = authCheck(context);
-
       if (name.trim() === "") {
         throw new Error("Pouch must have a name");
       }
+
+      const user = authCheck(context);
 
       const newPouch = new Pouch({
         name,
