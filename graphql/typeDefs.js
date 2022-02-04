@@ -5,6 +5,13 @@ module.exports = gql`
     id: ID!
     name: String!
     createdAt: String!
+    resources: [Resource]!
+  }
+
+  type Resource {
+    id: ID!
+    createdAt: String!
+    link: String!
   }
 
   type User {
@@ -30,5 +37,6 @@ module.exports = gql`
     login(email: String!, password: String!): User!
     createPouch(name: String!): Pouch!
     deletePouch(pouchId: ID!): String!
+    createResource(pouchId: String!, link: String!): Pouch!
   }
 `;
