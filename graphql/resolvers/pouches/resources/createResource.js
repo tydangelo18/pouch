@@ -5,7 +5,7 @@ const { UserInputError } = require("apollo-server");
 module.exports = {
   Mutation: {
     createResource: async (_, { pouchId, link }, context) => {
-      const user = authCheck(context);
+      const { email } = authCheck(context);
 
       if (link.trim() === "") {
         throw new UserInputError("Empty Resource", {
@@ -20,6 +20,7 @@ module.exports = {
       if (pouch) {
         pouch.resources.unshift({
           link,
+          email,
           createdAt: new Date().toISOString(),
         });
 

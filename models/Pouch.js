@@ -6,6 +6,7 @@ const pouchSchema = new Schema({
   resources: [
     {
       link: String,
+      email: String,
       createdAt: String,
     },
   ],

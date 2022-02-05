@@ -11,6 +11,7 @@ module.exports = gql`
   type Resource {
     id: ID!
     createdAt: String!
+    email: String!
     link: String!
   }
 
@@ -38,5 +39,6 @@ module.exports = gql`
     createPouch(name: String!): Pouch!
     deletePouch(pouchId: ID!): String!
     createResource(pouchId: String!, link: String!): Pouch!
+    deleteResource(pouchId: ID!, resourceId: ID!): Pouch!
   }
 `;

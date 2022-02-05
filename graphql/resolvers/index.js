@@ -3,6 +3,7 @@ const getPouchResolver = require("../resolvers/pouches/getPouch");
 const createPouchResolver = require("../resolvers/pouches/createPouch");
 const deletePouchResolver = require("../resolvers/pouches/deletePouch");
 const createResourceResolver = require("../resolvers/pouches/resources/createResource");
+const deleteResourceResolver = require("../resolvers/pouches/resources/deleteResource");
 const registerResolver = require("./users/register");
 const loginResolver = require("./users/login");
 
@@ -17,5 +18,6 @@ module.exports = {
     ...createPouchResolver.Mutation,
     ...deletePouchResolver.Mutation,
     ...createResourceResolver.Mutation,
+    ...deleteResourceResolver.Mutation,
   },
 };
