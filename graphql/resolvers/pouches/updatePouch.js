@@ -12,9 +12,6 @@ module.exports = {
       try {
         const pouch = await Pouch.findById(pouchId);
 
-        console.log(pouch);
-        console.log(user);
-
         if (user.id === pouch.user.toString()) {
           await pouch.updateOne({
             pouchId: pouchId,
