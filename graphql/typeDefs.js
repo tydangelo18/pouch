@@ -41,5 +41,6 @@ module.exports = gql`
     createResource(pouchId: String!, link: String!): Pouch!
     deleteResource(pouchId: ID!, resourceId: ID!): Pouch!
     updatePouch(pouchId: ID!, name: String!): Pouch!
+    updateResource(pouchId: ID!, resourceId: ID!, link: String!): Pouch!
   }
 `;
