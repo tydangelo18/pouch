@@ -15,14 +15,15 @@ const NavBar = () => {
   };
 
   return (
-    <div>
+    <div title="navbar">
       <Menu pointing secondary size="massive" color="orange">
         <Menu.Item
           name="home"
           active={activeItem === "home"}
           onClick={handleItemClick}
-          as={Link}
           to="/"
+          title='menuOption'
+          as={Link}
         />
 
         <Menu.Menu position="right">
@@ -30,15 +31,17 @@ const NavBar = () => {
             name="register"
             active={activeItem === "register"}
             onClick={handleItemClick}
-            as={Link}
             to="/register"
+            title='menuOption'
+            as={Link}
           />
           <Menu.Item
             name="login"
             active={activeItem === "login"}
             onClick={handleItemClick}
-            as={Link}
             to="/login"
+            title='menuOption'
+            as={Link}
           />
         </Menu.Menu>
       </Menu>
