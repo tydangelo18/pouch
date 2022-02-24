@@ -1,33 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, Button } from "semantic-ui-react";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import { useForm } from "../utils/hooks";
 
 function Register(props) {
   // Initial State and Hook
-  const [values, setValues] = useState({
+
+  const { onChange, onSubmit, values } = useForm(registerUser, {
     email: "",
     password: "",
     confirmPassword: "",
   });
 
-  // Form Methods
-  const onChange = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
-  };
-
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
-    update(_, result) {
-      console.log(result);
-      console.log(props);
-    },
+    update(_, result) {},
     variables: values,
   });
 
-  const onSubmit = (event) => {
-    event.preventDefault();
+  function registerUser() {
     addUser();
-  };
+  }
 
   return (
     <div title="register" className="form-container">
